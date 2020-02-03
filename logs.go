@@ -23,11 +23,13 @@ func init() {
 	log.logger = zerolog.New(os.Stdout).With().Timestamp().Caller().Logger()
 }
 
-func InitLogsToFile(filePath string) error {
+func InitLogsToFile(filePath string, configRewrite ...rollingwriter.Config) error {
 
+	// Paths
 	logPath := path.Dir(filePath)
 	fileName := strings.ReplaceAll(path.Base(filePath), path.Ext(filePath), "")
 
+	// Main config
 	config := rollingwriter.Config{
 		LogPath:                logPath,
 		TimeTagFormat:          "060102150405",
@@ -39,6 +41,13 @@ func InitLogsToFile(filePath string) error {
 		WriterMode:             "async",
 		BufferWriterThershould: 8 * 1024 * 1024,
 		Compress:               true,
+	}
+
+	// Rewrite config
+	if len(configRewrite) > 0 {
+		configRewrite[0].LogPath = config.LogPath
+		configRewrite[0].FileName = config.FileName
+		config = configRewrite[0]
 	}
 
 	// Create a writer
