@@ -103,3 +103,7 @@ func Fatal(text string) {
 func FatalF(format string, v ...interface{}) {
 	log.logger.Fatal().Msgf(format, v)
 }
+
+func SendErr(err error) {
+	log.logger.Err(err).Send()
+}
