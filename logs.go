@@ -69,7 +69,7 @@ func Debug(text string) {
 }
 
 func DebugF(format string, v ...interface{}) {
-	log.logger.Debug().Msgf(format, v)
+	log.logger.Debug().Msgf(format, v...)
 }
 
 func Info(text string) {
@@ -77,7 +77,7 @@ func Info(text string) {
 }
 
 func InfoF(format string, v ...interface{}) {
-	log.logger.Info().Msgf(format, v)
+	log.logger.Info().Msgf(format, v...)
 }
 
 func Warn(text string) {
@@ -85,7 +85,7 @@ func Warn(text string) {
 }
 
 func WarnF(format string, v ...interface{}) {
-	log.logger.Warn().Msgf(format, v)
+	log.logger.Warn().Msgf(format, v...)
 }
 
 func Error(text string) {
@@ -93,7 +93,7 @@ func Error(text string) {
 }
 
 func ErrorF(format string, v ...interface{}) {
-	log.logger.Error().Msgf(format, v)
+	log.logger.Error().Msgf(format, v...)
 }
 
 func Fatal(text string) {
@@ -101,7 +101,7 @@ func Fatal(text string) {
 }
 
 func FatalF(format string, v ...interface{}) {
-	log.logger.Fatal().Msgf(format, v)
+	log.logger.Fatal().Msgf(format, v...)
 }
 
 func SendErr(err error) {
