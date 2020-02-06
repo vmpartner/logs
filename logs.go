@@ -57,7 +57,7 @@ func InitLogsToFile(filePath string, configRewrite ...rollingwriter.Config) erro
 	}
 
 	// Log to file and console
-	log.logger = zerolog.New(io.MultiWriter(log.w, os.Stdout)).With().Timestamp().Caller().Logger()
+	log.logger = zerolog.New(io.MultiWriter(log.w, os.Stdout)).With().Timestamp().Logger()
 
 	return nil
 }
@@ -74,45 +74,45 @@ func Logger() *zerolog.Logger {
 }
 
 func Debug(text string) {
-	log.logger.Debug().Msg(text)
+	log.logger.Debug().Caller(1).Msg(text)
 }
 
 func DebugF(format string, v ...interface{}) {
-	log.logger.Debug().Msgf(format, v...)
+	log.logger.Debug().Caller(1).Msgf(format, v...)
 }
 
 func Info(text string) {
-	log.logger.Info().Msg(text)
+	log.logger.Info().Caller(1).Msg(text)
 }
 
 func InfoF(format string, v ...interface{}) {
-	log.logger.Info().Msgf(format, v...)
+	log.logger.Info().Caller(1).Msgf(format, v...)
 }
 
 func Warn(text string) {
-	log.logger.Warn().Msg(text)
+	log.logger.Warn().Caller(1).Msg(text)
 }
 
 func WarnF(format string, v ...interface{}) {
-	log.logger.Warn().Msgf(format, v...)
+	log.logger.Warn().Caller(1).Msgf(format, v...)
 }
 
 func Error(text string) {
-	log.logger.Error().Msg(text)
+	log.logger.Error().Caller(1).Msg(text)
 }
 
 func ErrorF(format string, v ...interface{}) {
-	log.logger.Error().Msgf(format, v...)
+	log.logger.Error().Caller(1).Msgf(format, v...)
 }
 
 func Fatal(text string) {
-	log.logger.Fatal().Msg(text)
+	log.logger.Fatal().Caller(1).Msg(text)
 }
 
 func FatalF(format string, v ...interface{}) {
-	log.logger.Fatal().Msgf(format, v...)
+	log.logger.Fatal().Caller(1).Msgf(format, v...)
 }
 
 func SendErr(err error) {
-	log.logger.Err(err).Send()
+	log.logger.Err(err).Caller(1).Send()
 }
