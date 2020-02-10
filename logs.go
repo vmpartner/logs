@@ -16,11 +16,13 @@ type Log struct {
 
 var log *Log
 var err error
+var CallerDeep int
 
 func init() {
 	zerolog.TimeFieldFormat = zerolog.TimeFormatUnix
 	log = new(Log)
-	log.logger = zerolog.New(os.Stdout).With().Timestamp().Caller().Logger()
+	log.logger = zerolog.New(os.Stdout).With().Timestamp().Logger()
+	CallerDeep = 1
 }
 
 func InitLogsToFile(filePath string, configRewrite ...rollingwriter.Config) error {
@@ -74,45 +76,45 @@ func Logger() *zerolog.Logger {
 }
 
 func Debug(text string) {
-	log.logger.Debug().Caller(1).Msg(text)
+	log.logger.Debug().Caller(CallerDeep).Msg(text)
 }
 
 func DebugF(format string, v ...interface{}) {
-	log.logger.Debug().Caller(1).Msgf(format, v...)
+	log.logger.Debug().Caller(CallerDeep).Msgf(format, v...)
 }
 
 func Info(text string) {
-	log.logger.Info().Caller(1).Msg(text)
+	log.logger.Info().Caller(CallerDeep).Msg(text)
 }
 
 func InfoF(format string, v ...interface{}) {
-	log.logger.Info().Caller(1).Msgf(format, v...)
+	log.logger.Info().Caller(CallerDeep).Msgf(format, v...)
 }
 
 func Warn(text string) {
-	log.logger.Warn().Caller(1).Msg(text)
+	log.logger.Warn().Caller(CallerDeep).Msg(text)
 }
 
 func WarnF(format string, v ...interface{}) {
-	log.logger.Warn().Caller(1).Msgf(format, v...)
+	log.logger.Warn().Caller(CallerDeep).Msgf(format, v...)
 }
 
 func Error(text string) {
-	log.logger.Error().Caller(1).Msg(text)
+	log.logger.Error().Caller(CallerDeep).Msg(text)
 }
 
 func ErrorF(format string, v ...interface{}) {
-	log.logger.Error().Caller(1).Msgf(format, v...)
+	log.logger.Error().Caller(CallerDeep).Msgf(format, v...)
 }
 
 func Fatal(text string) {
-	log.logger.Fatal().Caller(1).Msg(text)
+	log.logger.Fatal().Caller(CallerDeep).Msg(text)
 }
 
 func FatalF(format string, v ...interface{}) {
-	log.logger.Fatal().Caller(1).Msgf(format, v...)
+	log.logger.Fatal().Caller(CallerDeep).Msgf(format, v...)
 }
 
 func SendErr(err error) {
-	log.logger.Err(err).Caller(1).Send()
+	log.logger.Err(err).Caller(CallerDeep).Send()
 }
