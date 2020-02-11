@@ -71,6 +71,14 @@ func Close() {
 	log = nil
 }
 
+func SetCustomLogger(logger zerolog.Logger) {
+	log.logger = logger
+}
+
+func GetFileWriter() *rollingwriter.RollingWriter {
+	return &log.w
+}
+
 func Logger() *zerolog.Logger {
 	return &log.logger
 }
