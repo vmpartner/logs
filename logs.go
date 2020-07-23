@@ -64,6 +64,10 @@ func InitLogsToFile(filePath string, configRewrite ...rollingwriter.Config) erro
 	return nil
 }
 
+func SetLevel(level zerolog.Level) {
+	log.logger = log.logger.Level(level)
+}
+
 func Close() {
 	if log.w != nil {
 		log.w.Close()
